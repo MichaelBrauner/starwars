@@ -2,21 +2,24 @@
 
 namespace App\Service;
 
-use DateTime;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use Webmozart\Assert\Assert;
 
-final class StarwarsApiService {
+final readonly class StarwarsApiService {
     public function __construct(
-        private readonly HttpClientInterface $starwarsClient,
+        private HttpClientInterface $starwarsClient,
     )
     {
     }
 
+    /**
+     * @return array<int|string, mixed>
+     */
     public function getAllFilmsAsArray(): array
     {
         try {
@@ -37,6 +40,7 @@ final class StarwarsApiService {
             throw new NotFoundHttpException('Something went wrong with the Starwars API');
         }
 
+        Assert::isArray($films);
         return $films;
     }
 

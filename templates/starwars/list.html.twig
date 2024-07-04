@@ -6,26 +6,28 @@
 <turbo-frame id="film_list">
 
     <article class="film-list">
-        <div class="sort-button">
+        <div class="film-list--sort-button">
             <a href="{{ path('app_starwars_list', {'sort': nextSort, 'search': search}) }}"
                data-turbo-frame="_self">
                 {% if sort == 'asc' %}
-                    {% include 'partials/svg/arrow_down.svg.twig' %}
+                    {% include 'partials/svg/arrow_up.svg.twig' %}
                     Sort by Release Date
                 {% else %}
-                    {% include 'partials/svg/arrow_up.svg.twig' %}
+                    {% include 'partials/svg/arrow_down.svg.twig' %}
                     Sort by Release Date
                 {% endif %}
             </a>
         </div>
 
         {% for film in films %}
-            <section class="film-item" aria-labelledby="film-title-{{ loop.index }}">
+            <section class="film-list--film-item" aria-labelledby="film-title-{{ loop.index }}">
+
                 <header>
-                    <h2 id="film-title-{{ loop.index }}">{{ film.title }}</h2>
+                    <h2 id="film-title-{{ loop.index }}" class="golden">{{ film.title }}</h2>
                 </header>
-                <div class="film-content">
-                    <p>{{ film.openingCrawl }}</p>
+
+                <div class="film-list--content">
+                    <p class="space-b-md">{{ film.openingCrawl }}</p>
                     <p><strong>Director:</strong> {{ film.director }}</p>
 
                     <div class="film-producers">

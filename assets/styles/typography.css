@@ -1,0 +1,21 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'StarJedi', sans-serif;
+    color: var(--sw-white);
+    letter-spacing: 0.2rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+p {
+    color: var(--sw-gray);
+    font-size: 1rem;
+    line-height: 1.5;
+}

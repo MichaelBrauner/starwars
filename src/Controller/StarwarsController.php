@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Cache\CacheInterface;
+use Webmozart\Assert\Assert;
 
 class StarwarsController extends AbstractController {
     #[Cache(maxage: 3600, public: true, mustRevalidate: true)]
@@ -31,18 +32,22 @@ class StarwarsController extends AbstractController {
     {
         $films = $cache->get('starwars.films', fn() => $starwarsApi->getAllFilmsAsArray());
 
-        if ($search) {
-            $films = array_filter($films, function ($film) use ($search) {
-                $title = strtolower($film['title']);
+        if ($search !== null) {
+            $films = array_filter($films, function (mixed $film) use ($search) {
+                Assert::isArray($film);
+                $title = $film['title'];
+                Assert::string($title);
+                $title = strtolower($title);
                 $search = strtolower($search);
 
                 return str_contains($title, $search);
             });
         }
 
-        usort($films, function ($a, $b) use ($sort) {
-            $dateA = new DateTime($a['releaseDate']);
-            $dateB = new DateTime($b['releaseDate']);
+        Assert::allIsArray($films);
+        usort($films, function (array $a, array $b) use ($sort) {
+            $dateA = new DateTime((string)$a['releaseDate']);
+            $dateB = new DateTime((string)$b['releaseDate']);
             if ($sort === 'asc') {
                 return $dateB <=> $dateA;
             }

@@ -7,6 +7,9 @@
 /public/bundles/
 /var/
 /vendor/
+.idea
+.psalm
+.phpunit.result.cache
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
@@ -15,3 +18,7 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

@@ -20,6 +20,11 @@ Encore
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            config: path.resolve(__dirname, 'postcss.config.js'),
+        }
+    })
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
