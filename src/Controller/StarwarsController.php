@@ -31,7 +31,6 @@ class StarwarsController extends AbstractController {
     {
         $films = $cache->get('starwars.films', fn() => $starwarsApi->getAllFilmsAsArray());
 
-        dump($search);
         if ($search) {
             $films = array_filter($films, function ($film) use ($search) {
                 $title = strtolower($film['title']);

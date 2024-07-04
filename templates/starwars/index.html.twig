@@ -48,7 +48,7 @@
                   action="{{ path('app_starwars_list') }}"
                   id="search-form"
                   data-controller="autosubmit"
-                  data-turbo-frame="film-list"
+                  data-turbo-frame="film_list"
             >
                 <label>
                     <input type="search"
@@ -62,7 +62,7 @@
 
         </div>
 
-        <turbo-frame id="film-list" src="{{ path('app_starwars_list') }}" loading="lazy"></turbo-frame>
+        <turbo-frame id="film_list" src="{{ path('app_starwars_list') }}" loading="lazy"></turbo-frame>
     </div>
 {% endblock %}
 </body>

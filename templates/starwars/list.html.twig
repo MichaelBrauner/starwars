@@ -3,12 +3,12 @@
 {% set sort = app.request.query.get('sort')|default('desc') %}
 {% set nextSort = sort is not same as('asc') ? 'asc' : 'desc' %}
 
-<turbo-frame id="film-list">
+<turbo-frame id="film_list">
 
-    <article class=" film-list">
-
+    <article class="film-list">
         <div class="sort-button">
-            <a href="{{ path('app_starwars_list', {'sort': nextSort, 'search': search}) }}">
+            <a href="{{ path('app_starwars_list', {'sort': nextSort, 'search': search}) }}"
+               data-turbo-frame="_self">
                 {% if sort == 'asc' %}
                     {% include 'partials/svg/arrow_down.svg.twig' %}
                     Sort by Release Date
@@ -30,7 +30,7 @@
 
                     <div class="film-producers">
                         <p>
-                            <strong>Producers:</strong>
+                            <strong>{{ film.producers|length > 1 ? 'Producers': 'Producer' }}:</strong>
                             {{ film.producers|join(', ') }}
                         </p>
                     </div>
