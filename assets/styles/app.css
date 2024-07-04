@@ -1,0 +1,77 @@
+:root {
+    --sw-dark-blue: #0C1E33;
+    --sw-black: #000000;
+    --sw-white: #FFFFFF;
+    --sw-lightsaber-blue: #00AEEF;
+    --sw-lightsaber-green: #39B54A;
+    --sw-lightsaber-red: #D10000;
+    --sw-gray: #7D7D7D;
+    --sw-gold: #FFD700;
+}
+
+@font-face {
+    font-family: 'StarJedi';
+    src: url('../fonts/starjedi/starjedi-webfont.woff2') format('woff2'),
+    url('../fonts/starjedi/starjedi-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: var(--sw-dark-blue);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'StarJedi', sans-serif;
+    color: var(--sw-white);
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.2rem;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%
+}
+
+.highlight {
+    color: var(--sw-lightsaber-blue);
+}
+
+.text-center {
+    text-align: center
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px
+    }
+}
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1536px
+    }
+}
