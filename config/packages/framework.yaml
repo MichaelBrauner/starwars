@@ -13,6 +13,8 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
+    http_cache: true
+
     #esi: true
     #fragments: true
     php_errors:

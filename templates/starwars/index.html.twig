@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
 
     {%~ block title -%}
-        <title>{{ 'Starwars'|trans }} 🌟 -</title>
+        <title>{{ 'Starwars' }} 🌟 -</title>
     {%- endblock ~%}
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ 'Starwars' }}">
 
     {% block meta %} {% endblock %}
 
@@ -27,14 +28,41 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
 </head>
 
 <body>
 {% block body %}
     <div class="container">
         <h1 class="text-center">
-            <span class="highlight">{{ 'Starwars'|trans|raw }}</span>
+            <span class="highlight">{{ 'Starwars' }}</span>
         </h1>
+
+        <div class="film-search">
+            {% set search_query = app.request.get('query', '') %}
+            <form method="get"
+                  action="{{ path('app_starwars_list') }}"
+                  id="search-form"
+                  data-controller="autosubmit"
+                  data-turbo-frame="film-list"
+            >
+                <label>
+                    <input type="search"
+                           name="search"
+                           placeholder="{{ 'Search films' }}"
+                           data-action="input->autosubmit#debouncedSubmit"
+                           value="{{ search_query }}"
+                    >
+                </label>
+            </form>
+
+        </div>
+
+        <turbo-frame id="film-list" src="{{ path('app_starwars_list') }}" loading="lazy"></turbo-frame>
     </div>
 {% endblock %}
 </body>

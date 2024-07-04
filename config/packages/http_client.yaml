@@ -1,0 +1,8 @@
+framework:
+  http_client:
+    scoped_clients:
+      starwars.client:
+        base_uri: '%env(STARWARS_API_URL)%'
+        headers:
+          Accept: 'application/json'
+          Content-Type: 'application/json'

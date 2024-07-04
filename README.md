@@ -7,6 +7,7 @@ A sample project as a test work - by Michael Brauner
 ```bash
 git clone git@github.com:MichaelBrauner/starwars_conecto.git starwars_michael_brauner
 cd starwars_michael_brauner
+yarn install --force && yarn build
 symfony serve -d
 ```
 
