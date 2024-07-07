@@ -17,17 +17,33 @@ Or you can just use whatever local webserver you have installed.
 
 ### Instructions
 
+There is a Makefile.
+See all available commands with:
+
+```bash
+make help
+```
+
+![Makefile](assets/images/makefile.png)
+
 ```bash
 git clone git@github.com:MichaelBrauner/starwars_conecto.git starwars_michael_brauner
 cd starwars_michael_brauner
-yarn install --force && yarn build
-composer install
+make build
 symfony serve -d
 ```
 
 Now you can access the project under [https://127.0.0.1:8000](https://127.0.0.1:8000)
 
 ### Code Quality
+
+I use the following tools for code quality.
+You can run them all with the following make command:
+
+```bash
+make quality
+```
+
 #### PHPStan
 
 I use PHPStan and Psalm for static code analysis. You can run it with the following command:
@@ -38,6 +54,7 @@ vendor/bin/psalm
 ```
 
 ### Coding Standards
+
 I use symplify/easy-coding-standard for code style checks. You can run it with the following command:
 
 ```bash
