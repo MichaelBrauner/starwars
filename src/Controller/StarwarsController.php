@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Service\StarwarsApiService;
@@ -12,7 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 use Webmozart\Assert\Assert;
 
-class StarwarsController extends AbstractController {
+class StarwarsController extends AbstractController
+{
     #[Cache(maxage: 3600, public: true, mustRevalidate: true)]
     #[Route('/', name: 'app_starwars_index', stateless: true)]
     public function index(): Response
@@ -23,14 +26,13 @@ class StarwarsController extends AbstractController {
     #[Route('/list', name: 'app_starwars_list')]
     public function list(
         StarwarsApiService $starwarsApi,
-        CacheInterface     $cache,
+        CacheInterface $cache,
         #[MapQueryParameter]
-        ?string            $search = null,
+        ?string $search = null,
         #[MapQueryParameter]
-        ?string            $sort = null,
-    ): Response
-    {
-        $films = $cache->get('starwars.films', fn() => $starwarsApi->getAllFilmsAsArray());
+        ?string $sort = null,
+    ): Response {
+        $films = $cache->get('starwars.films', fn () => $starwarsApi->getAllFilmsAsArray());
 
         if ($search !== null) {
             $films = array_filter($films, function (mixed $film) use ($search) {
@@ -47,8 +49,8 @@ class StarwarsController extends AbstractController {
 
         Assert::allIsArray($films);
         usort($films, function (array $a, array $b) use ($sort) {
-            $dateA = new DateTime((string)$a['releaseDate']);
-            $dateB = new DateTime((string)$b['releaseDate']);
+            $dateA = new DateTime((string) $a['releaseDate']);
+            $dateB = new DateTime((string) $b['releaseDate']);
             if ($sort === 'asc') {
                 return $dateB <=> $dateA;
             }
@@ -56,6 +58,8 @@ class StarwarsController extends AbstractController {
             return $dateA <=> $dateB;
         });
 
-        return $this->render('starwars/list.html.twig', ['films' => $films]);
+        return $this->render('starwars/list.html.twig', [
+            'films' => $films,
+        ]);
     }
 }

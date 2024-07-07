@@ -27,13 +27,21 @@ symfony serve -d
 
 Now you can access the project under [https://127.0.0.1:8000](https://127.0.0.1:8000)
 
-### PHPStan
+### Code Quality
+#### PHPStan
 
 I use PHPStan and Psalm for static code analysis. You can run it with the following command:
 
 ```bash
 vendor/bin/phpstan analyse
 vendor/bin/psalm
+```
+
+### Coding Standards
+I use symplify/easy-coding-standard for code style checks. You can run it with the following command:
+
+```bash
+vendor/bin/ecs 
 ```
 
 ### Tests

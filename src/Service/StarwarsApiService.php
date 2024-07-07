@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use Exception;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
@@ -13,11 +14,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Webmozart\Assert\Assert;
 
-final readonly class StarwarsApiService {
+final readonly class StarwarsApiService
+{
     public function __construct(
         private HttpClientInterface $starwarsClient,
-    )
-    {
+    ) {
     }
 
     /**
@@ -50,9 +51,7 @@ final readonly class StarwarsApiService {
         Assert::isArray($films);
         return $films;
     }
-    /**
-     * @throws TransportExceptionInterface
-     */
+
     public function getAllFilms(): ResponseInterface
     {
         $query = <<<'GRAPHQL'

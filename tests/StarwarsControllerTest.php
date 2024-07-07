@@ -6,7 +6,8 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class StarwarsControllerTest extends WebTestCase {
+class StarwarsControllerTest extends WebTestCase
+{
     public function testSomething(): void
     {
         $client = static::createClient();
