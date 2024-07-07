@@ -3,7 +3,10 @@
 namespace App\Service;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -24,26 +27,29 @@ final readonly class StarwarsApiService {
     {
         try {
             $response = $this->getAllFilms();
-        } catch (TransportExceptionInterface) {
-            throw new NotFoundHttpException('Something went wrong with the Starwars API');
+        } catch (TransportExceptionInterface $e) {
+            throw new ServiceUnavailableHttpException(null, 'Unable to reach the Starwars API', $e);
         }
 
         try {
             $dataArray = $response->toArray();
-        } catch (Exception) {
-            throw new NotFoundHttpException('Something went wrong with the Starwars API');
+        } catch (Exception $e) {
+            throw new NotFoundHttpException('Unexpected error when processing the response from the Starwars API', $e);
         }
 
-        $films = PropertyAccess::createPropertyAccessor()->getValue($dataArray, '[data][allFilms][films]');
+        try {
+            $films = PropertyAccess::createPropertyAccessor()->getValue($dataArray, '[data][allFilms][films]');
+        } catch (AccessException $e) {
+            throw new NotFoundHttpException('Invalid structure in the response data from the Starwars API', $e);
+        }
 
         if ($films === null) {
-            throw new NotFoundHttpException('Something went wrong with the Starwars API');
+            throw new NotFoundHttpException('No films found in the Starwars API response');
         }
 
         Assert::isArray($films);
         return $films;
     }
-
     /**
      * @throws TransportExceptionInterface
      */
@@ -73,6 +79,4 @@ final readonly class StarwarsApiService {
             ]
         );
     }
-
-
 }

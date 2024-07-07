@@ -35,6 +35,7 @@ class StarwarsController extends AbstractController {
         if ($search !== null) {
             $films = array_filter($films, function (mixed $film) use ($search) {
                 Assert::isArray($film);
+                Assert::keyExists($film, 'title');
                 $title = $film['title'];
                 Assert::string($title);
                 $title = strtolower($title);
