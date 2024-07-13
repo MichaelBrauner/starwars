@@ -2,9 +2,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">
-            <span class="highlight">{{ 'Starwars' }}</span>
-        </h1>
+        <h1 class="text-center highlight">{{ 'Starwars' }}</h1>
 
         <div class="film-list--search">
             {% set search_query = app.request.get('query', '') %}

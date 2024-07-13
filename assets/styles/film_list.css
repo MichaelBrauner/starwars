@@ -2,7 +2,8 @@
     max-width: 80ch;
     margin-left: auto;
     margin-right: auto;
-    padding: 0.5rem 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
 
     strong {
         color: var(--sw-white);
@@ -26,7 +27,8 @@
 
     #film-list--search-form {
         margin-bottom: 2rem;
-        padding: 0.5rem 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
