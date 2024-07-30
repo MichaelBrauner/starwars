@@ -1,6 +1,6 @@
 # Starwars
 
-A sample project as a test work - by Michael Brauner for [CONECTO Business Communication GmbH](https://www.conecto.at/).
+Just a simple Starwars project for fun :)
 
 ## Installation
 
