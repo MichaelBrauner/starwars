@@ -27,8 +27,8 @@ make help
 ![Makefile](assets/images/makefile.png)
 
 ```bash
-git clone git@github.com:MichaelBrauner/starwars_conecto.git starwars_michael_brauner
-cd starwars_michael_brauner
+git clone git@github.com:MichaelBrauner/starwars.git starwars
+cd starwars
 make build
 symfony serve -d
 ```
